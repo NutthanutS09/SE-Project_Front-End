@@ -1,23 +1,22 @@
 <div class="body">
     <div class="register-container">
         <h2>Sign Up</h2>
-        <form>
-        <label for="fullname" class="text">Full Name</label>
-        <input type="text" id="fullname" placeholder="Enter your full name" required>
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
-        <label>
-            <input type="checkbox" id="checkbox"> I agree to the <a href="#">Terms & Conditions</a>
-        </label>
-        <!--<button type="submit">Sign Up</button>-->
-        <!--<button [ngClass]="{'active': isActive}" (click)="toggleColor()">
-            Sign Up
-            </button>-->
-        </form>
+        <form #loginForm="ngForm">
+            <label for="fullname" class="text">First Name</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your full name" [(ngModel)]="regis.firstname" required>
+            <label for="lastname" class="text">Last Name</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your full name" [(ngModel)]="regis.lastname" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" pattern=".+@gmail.com" [(ngModel)]="regis.email" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" [(ngModel)]="regis.password" required>
+            <label for="conpassword">Confirm Password</label>
+            <input type="password" id="confirm" name="confirm" placeholder="Confirm your password" [(ngModel)]="regis.confirm" required>
+            <label>
+                <input type="checkbox" id="checkbox" name="checkbox" [(ngModel)]="regis.checkbox" required> I agree to the <a href="#">Terms & Conditions</a>
+            </label>
+        <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" (click)="onSubmit()">Submit</button>
+    </form>
         <p id="login-text"> Already have an account? <a id="login-page" href="#">Log in</a></p>
     </div>
 </div>

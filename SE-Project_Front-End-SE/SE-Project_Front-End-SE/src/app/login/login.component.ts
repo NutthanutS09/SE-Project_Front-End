@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  login = {
+    email: '',
+    password: ''
+  }
+
+  onSubmit() {
+    console.log(this.login);
+  }
 
 }

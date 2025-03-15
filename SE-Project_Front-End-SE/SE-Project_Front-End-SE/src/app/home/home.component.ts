@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  user = {
+    username: '',
+    password: '',
+    checkbox: false,
+  };
 
+  onSubmit() {
+    console.log(this.user);
+  }
 }

@@ -8,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './regis.component.css'
 })
 export class RegisComponent {
+  regis = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    confirm: '',
+    checkbox: false,
+  }
 
+  onSubmit() {
+    console.log(this.regis);
+  }
 }
