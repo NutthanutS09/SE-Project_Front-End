@@ -15,7 +15,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthAdmin } from './authAdmin';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/menu', pathMatch: 'full'},
   // {path: 'home', component: HomeComponent },
   {path: 'menu', component: MenuComponent},
   {path: 'reservation', component: ReservationComponent},
