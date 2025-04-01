@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"> ร้านบ้านจุนตา</a>
+    <a class="navbar-brand" routerLink="/menu"> ร้านบ้านจุนตา</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -10,28 +10,81 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div
-      class="collapse navbar-collapse d-flex justify-content-center"
+      class="collapse navbar-collapse"
       id="navbarNav"
     >
       <ul class="nav navbar-nav">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/home">หน้าหลัก</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/menu">เมนูอาหารจานเด็ดจากทางร้าน</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/reservation">จองโต๊ะ</a>
         </li>
+        <div class="dropdown me-4">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="admin">
+            Admin
+          </button>
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="!admin && isLogin">
+            {{ this.name }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" *ngIf="admin">
+            <li><a class="dropdown-item" routerLink="/info">Info</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/dashboard">Admin Page</a></li>
+            <li><a href="javascript:void(0)" class="dropdown-item nav-item" (click)="onLogout()" *ngIf="isLogin"><i class="bi bi-door-open"></i> ออกจากระบบ</a></li>
+          </ul>
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" *ngIf="!admin && isLogin">
+            <li><a class="dropdown-item" routerLink="/info">Info</a></li>
+            <li><a href="javascript:void(0)" class="dropdown-item nav-item" (click)="onLogout()" *ngIf="isLogin"><i class="bi bi-door-open"></i> ออกจากระบบ</a></li>
+          </ul>
+        </div>
+        <div id="login-container">
+          <a routerLink="login" class="nav-link text-light" *ngIf="!isLogin" id="login-btn">Log In</a>
+        </div>
       </ul>
     </div>
   </div>
-
-  <a routerLink="login" class="nav-item nav-link text-white-50" style="width: 150px"><i class="bi bi-door-open"></i> เข้าสู่ระบบ</a>
-  <a routerLink="regis" class="nav-item nav-link text-white-50" style="width: 150px"><i class="bi bi-door-open"></i> สมัครบัญชี</a>
-  <a href="#" class="nav-item nav-link text-white-50" style="width: 150px"><i class="bi bi-door-open"></i> ออกจากระบบ</a>
 </nav>
 
-<div class="container mt-4">
+<div class="router mt-4 mb-4">
   <router-outlet></router-outlet>
 </div>
+
+<footer class="footer mt-5">
+  <div class="container mt-5">
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <h5 class="text-white">📍 ที่ตั้งร้าน</h5>
+        <p class="text-light">123 ถนนสุขุมวิท, กรุงเทพฯ 10110</p>
+      </div>
+      
+      <div class="col-md-3">
+        <h5 class="text-white">⏰ เวลาเปิด-ปิด</h5>
+        <p class="text-light">จันทร์ - อาทิตย์: 11:00 - 22:00</p>
+      </div>
+      
+      <div class="col-md-3">
+        <h5 class="text-white">📞 เบอร์โทร</h5>
+        <p class="text-light">088-999-8989</p>
+      </div>
+
+      <div class="col-md-3">
+        <h5 class="text-white">📧 อีเมล</h5>
+        <p class="text-light">contact&#64;omakase.com</p>
+      </div>
+    </div>
+
+    <div class="social-links text-center mt-4">
+      <h5 class="text-white">ติดตามเราได้ที่</h5>
+      <a href="javascript:void(0)" class="mx-2 text-primary">Facebook</a>
+      <a href="javascript:void(0)" class="mx-2 text-success">Line</a>
+      <a href="javascript:void(0)" class="mx-2 text-danger">YouTube</a>
+    </div>
+    
+    <div class="text-center mt-4 mb-5">
+      <p class="text-light">&copy; 2025 Omakase Restaurant. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>

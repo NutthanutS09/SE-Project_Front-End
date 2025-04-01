@@ -1,0 +1,9 @@
+.container table {
+    margin: 0 auto;
+    padding: 30px;
+    border: 2px solid #5A3D29;
+    border-radius: 12px;
+    background-color: #f8f1e4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Lora', serif;
+}

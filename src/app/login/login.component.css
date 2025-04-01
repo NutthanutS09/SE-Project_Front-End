@@ -1,0 +1,56 @@
+.LoginPage {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 2px solid #5A3D29;
+  border-radius: 12px;
+  background-color: #f8f1e4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Lora', serif;
+}
+
+.LoginPage h3 p {
+  font-size: 26px;
+  font-weight: 600;
+  color: #5A3D29;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #5A3D29;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-control:focus {
+  border-color: #C7A57E;
+  box-shadow: 0 0 5px rgba(199, 165, 126, 0.5);
+}
+
+.btn {
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #C7A57E;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+.btn:hover {
+  background-color: #5A3D29;
+}
+
+.text-danger {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #E74C3C;
+}
+
+body {
+  background-color: #E9E8D8;
+  padding-top: 50px;
+  font-family: 'Lora', serif;
+}

@@ -1,1 +1,151 @@
-<p>reservation works!</p>
+<div class="container">
+  <div class="position-relative m-4">
+    <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
+      <div class="progress-bar" id="progress" style="width: 0%"></div>
+    </div>
+    <button 
+    type="button" 
+    class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" 
+    id="page1"
+    style="width: 2rem; height:2rem;"
+    (click)="changePage(1)"
+    >
+    1
+    </button>
+    <p class="position-absolute mt-3" style="right: 100;">โต๊ะ</p>
+  
+    <button 
+    type="button" 
+    class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill" 
+    id="page2"
+    style="width: 2rem; height:2rem;" 
+    (click)="changePage(2)"
+    >
+    2
+    </button>
+    <p class="position-absolute mt-3" style="right: 48%;">การจอง</p>
+  
+    <button 
+    type="button" 
+    class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" 
+    id="page3"
+    style="width: 2rem; height:2rem;"
+    (click)="changePage(3)"
+    >
+    3
+    </button>
+    <p class="position-absolute mt-3" style="right: 0;">ชำระเงิน</p>
+  </div>
+</div>
+
+<div class="container mt-5" id="table">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary fw-bold">🍣 เลือกโต๊ะ</h2>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-12">
+        <button class="btn btn-outline-dark w-100 py-3 fs-4 shadow-sm" (click)="setTable('1')">โต๊ะที่ 1</button>
+      </div>
+      <div class="col-12 col-md-12">
+        <button class="btn btn-outline-dark w-100 py-3 fs-4 shadow-sm" (click)="setTable('2')">โต๊ะที่ 2</button>
+      </div>
+      <div class="col-12 col-md-12">
+        <button class="btn btn-outline-dark w-100 py-3 fs-4 shadow-sm" (click)="setTable('3')">โต๊ะที่ 3</button>
+      </div>
+      <div class="col-12 col-md-12">
+        <button class="btn btn-outline-dark w-100 py-3 fs-4 shadow-sm" (click)="setTable('4')">โต๊ะที่ 4</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5" id="reservation">
+  <form #reservationForm="ngForm">
+    <h2 class="text-center mb-4">📅 จองโต๊ะ Omakase</h2>
+    <!-- เลือกคอร์ส -->
+    <div class="d-flex justify-content-center mb-2 ">
+      <div class="btn-group w-100" role="group" *ngFor="let course of courses">
+        <button 
+          class="btn btn-outline-dark text-dark" 
+          [ngClass]="{'bg-warning': reservation.course === course.Type_name, 'bg-light': reservation.course !== course.Type_name}"
+          (click)="setCourse(course.Type_name)"
+          type="button"
+          required
+        >
+          🍣 {{ course.Type_name }} Course
+        </button>
+      </div>
+    </div>
+
+    <!-- เลือกวันที่ -->
+    <div class="mb-3">
+      <label for="date" class="form-label">เลือกวันที่</label>
+      <input type="date" class="form-control" id="date" [(ngModel)]="reservation.date" name="date" required [min]="minDate">
+    </div>    
+
+    <!-- เลือกเวลาของคอร์ส -->
+    <div class="mb-3">
+      <label for="time" class="form-label">เลือกเวลา</label>
+      <select class="form-select" id="time" [(ngModel)]="reservation.time" name="time" required>
+        <option value="" selected disabled>กรุณาเลือกเวลา</option>
+        <option value="12:00-14:00">12:00 - 14:00 น.</option>
+        <option value="15:00-17:00">15:00 - 17:00 น.</option>
+        <option value="18:00-20:00">18:00 - 20:00 น.</option>
+        <option value="20:00-22:00">21:00 - 23:00 น.</option>
+      </select>
+    </div>
+
+    <!-- จำนวนคน -->
+    <div class="mb-3">
+      <label for="people" class="form-label">จำนวนคน (สูงสุด 8 ที่นั่ง)</label>
+      <input type="number" class="form-control" id="people" [(ngModel)]="reservation.people" name="people" min="1" max="8" required>
+    </div>
+
+    <!-- หมายเหตุเพิ่มเติม -->
+    <div class="mb-3">
+      <label for="note" class="form-label">หมายเหตุเพิ่มเติม</label>
+      <textarea class="form-control" id="note" [(ngModel)]="reservation.note" name="note" rows="3"></textarea>
+    </div>
+
+    <div class="navigate d-flex justify-content-between mt-4">
+      <button class="btn btn-secondary btn-lg px-5 py-3 rounded-pill shadow-sm" (click)="changePage(1)">ย้อนกลับ</button>
+      <button class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm" [disabled]="!reservationForm.valid || !reservation.course" (click)="onReservation()">จองโต๊ะ</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="container mt-5" id="pay">
+  <div class="container px-4">
+    <h2 class="text-center mb-4 text-primary fw-bold">💳 ชำระเงิน</h2>
+    
+    <p class="text-center fs-5 text-secondary">กรุณาเลือกวิธีการชำระเงิน</p>
+
+    <!-- ตัวเลือกการชำระเงิน -->
+    <div class="d-flex flex-column align-items-center gap-3 mb-4">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="deposit" name="paymentType" value="deposit" (change)="payment($event)">
+        <label class="form-check-label fs-5" for="deposit">💰 มัดจำ 50%</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="full" name="paymentType" value="full" (change)="payment($event)">
+        <label class="form-check-label fs-5" for="full">💵 จ่ายเต็มจำนวน</label>
+      </div>
+    </div>
+
+    <!-- แสดงจำนวนเงินที่ต้องชำระ -->
+    <p class="text-center fs-3 fw-bold" *ngIf="total === 0">
+      จำนวนเงินที่ต้องชำระ: <strong class="text-warning">{{ price }} บาท</strong>
+    </p>
+    <p class="text-center fs-3 fw-bold" *ngIf="total !== 0">
+      จำนวนเงินที่ต้องชำระ: <strong class="text-warning">{{ total }} บาท</strong>
+    </p>
+
+    <!-- ปุ่มนำทาง -->
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-secondary btn-lg px-5 py-3 rounded-pill shadow-sm" (click)="changePage(2)">🔙 ย้อนกลับ</button>
+      <button class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm" (click)="onPayment()">✅ ชำระเงิน</button>
+    </div>
+  </div>
+</div>

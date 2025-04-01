@@ -1,1 +1,47 @@
-<p>regis works!</p>
+<div class="register-container container">
+    <h2 class="text-center mb-4"><p>Sign Up</p></h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group mb-3">
+            <label for="firstname" class="text">First Name</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your full name" [(ngModel)]="regis.firstname" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="lastname" class="text">Last Name</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your full name" [(ngModel)]="regis.lastname" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your Phone number" maxlength="12" [(ngModel)]="regis.phone" (input)="onPhoneInput($event)" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" pattern=".+@gmail.com" [(ngModel)]="regis.email" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" [(ngModel)]="regis.password" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="confirm">Confirm Password</label>
+            <input type="password" id="confirm" name="confirm" placeholder="Confirm your password" [(ngModel)]="regis.confirm" required class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label>
+                <input type="checkbox" id="checkbox" name="checkbox" [(ngModel)]="regis.checkbox" required>I agree to the 
+                <a href="#"class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    Terms & Conditions
+                </a>
+            </label>
+        </div>
+
+        <p>Already a User? <a routerLink="/login" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" *ngIf="!isLogin"> Log In</a></p>
+        <button class="btn btn-primary w-100" type="submit" [disabled]="!loginForm.valid">Submit</button>
+    </form>
+    <p class="text-center mt-4" id="login-text">Already have an account? <a id="login-page" href="#">Log in</a></p>
+</div>

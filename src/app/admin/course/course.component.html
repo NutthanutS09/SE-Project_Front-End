@@ -1,0 +1,191 @@
+<div class="container mt-5">
+    <div class="course">
+        <h3 class="text-dark">🍣 Course Management</h3>
+        <hr>
+        <div class="navigate d-flex mb-3 justify-content-end">
+            <button class="btn btn-success shadow-sm px-3" data-bs-toggle="modal" data-bs-target="#courseModal">
+                <i class="bi bi-plus-circle"></i> Add Course
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Order No</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">price</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let course of courses; let i = index">
+                        <td scope="row">{{ i + 1 }}</td>
+                        <td class="fw-bold">{{ course.Type_name }}</td>
+                        <td class="fw-bold">{{ course.Price }}</td>
+                        <td>
+                            <a href="javascript:void(0)" class="text-primary" [attr.data-bs-target]="'#editcourseModalLabel' + i" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#editcourseModalLabel"
+                            (click)="getDataCourse(i)"
+                            >
+                                <i class="bi bi-pencil-square fs-5"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="text-danger" (click)="onDeleteCourse(i)">
+                                <i class="bi bi-trash3 fs-5"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="menu-management p-4">
+        <h3 class="text-dark fw-bold">🍣 Menu Management</h3>
+        <hr class="mb-4">
+        
+    <div class="navigate d-flex mb-4 justify-content-end">
+        <button class="btn btn-success shadow-sm px-3" data-bs-toggle="modal" data-bs-target="#menuModal">
+            <i class="bi bi-plus-circle"></i> Add Menu
+        </button>
+    </div>
+    <div class="table-responsive mb-5">
+        <table class="table table-hover align-middle shadow-sm rounded-3 overflow-hidden">
+            <thead class="table-warning text-dark">
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ครอส</th>
+                    <th>ประเภทอาหาร</th>
+                    <th>ชื่อเมนู</th>
+                    <th>จำนวนคำ</th>
+                    <!-- <th>คำอธิบาย</th> -->
+                    <!-- <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-light" *ngFor="let menu of menu; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ menu.Type_name }}</td>
+                    <td>{{ menu.Category_name }}</td>
+                    <td>{{ menu.Food_name }}</td>
+                    <td>{{ menu.Quantity_food }}</td>
+                    <!-- <td>คัดสรรซูชิระดับพรีเมียมจากเชฟมืออาชีพ</td> -->
+                    <!-- <td class="text-center">
+                        <a href="javascript:void(0)" class="text-primary">
+                            <i class="bi bi-pencil-square fs-5"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="javascript:void(0)" class="text-danger">
+                            <i class="bi bi-trash3 fs-5"></i>
+                        </a>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Course Modal -->
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="courseModalLabel">Course</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form #formCourse="ngForm">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="courseName" class="form-label">Course Name</label>
+                <input type="text" class="form-control" id="courseName" name="courseName" [(ngModel)]="course.name" required>
+            </div>
+            <div class="mb-3">
+                <label for="courseName" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" min="0" [(ngModel)]="course.price" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" [disabled]="!formCourse.valid" (click)="onAddCourse()">Save</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Course Edit Modal -->
+<div class="editCourse" *ngFor="let menu of menu; let i = index">
+    <div class="modal fade" [id]="'editcourseModalLabel' + i"  tabindex="-1" aria-labelledby="editcourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="editcourseModalLabel">Course</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form #formCourse="ngForm">
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="courseName" class="form-label">Course Name</label>
+                      <input type="text" class="form-control" id="courseName" name="courseName" [(ngModel)]="name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="courseName" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="price" name="price" [(ngModel)]="price" required>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" [disabled]="!formCourse.valid" (click)="onEditCourse(i)">Save</button>
+              </div>
+          </form>
+          </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu Modal -->
+<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="menuModal">Menu</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form #formCourse="ngForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="courseSelect" class="form-label">Select Course</label>
+                        <select class="form-select" id="courseSelect" [(ngModel)]="selectCourse" name="selectCourse" required>
+                            <option *ngFor="let course of courses" value="{{ course.Type_name }}">
+                                {{ course.Type_name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div *ngFor="let category of category; let i = index" class="mb-3">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <h5 class="text-muted">{{ category.Category_name }}</h5>
+                                <div class="d-flex">
+                                    <input type="text" class="form-control me-2" placeholder="ชื่อ" [(ngModel)]="food[i]" name="foodName" id="foodName" required>
+                                    <input type="number" class="form-control" placeholder="จำนวน" [(ngModel)]="quantity[i]" name="quantity" id="quantity" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="onAddMenu()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
