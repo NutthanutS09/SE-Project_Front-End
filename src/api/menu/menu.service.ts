@@ -10,9 +10,7 @@ export class MenuService {
   constructor(private http : HttpClient) { }
 
   getCourses() {
-    const token = localStorage.getItem('Token');
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get(`${this.url}/course`, { headers });
+    return this.http.get(`${this.url}/course`);
   }
 
   getCategories() {
